@@ -6,8 +6,11 @@ import android.telephony.PhoneNumberUtils
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+
+private const val TAG = "Main"
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,8 +58,8 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun afterTextChanged(s: Editable?) {
-                val userInput = userInputMessageEditText.text.toString()
-                if (PhoneNumberUtils.isGlobalPhoneNumber(userInput)) {
+                val formattedNumber = PhoneNumberUtils.formatNumber(s, 0)
+                if (PhoneNumberUtils.isGlobalPhoneNumber(formattedNumber)) {
                     userInputPhoneIsValid = true;
                 }
                 validateInput(
@@ -98,6 +101,10 @@ class MainActivity : AppCompatActivity() {
         userInputNagTimeIsValid: Boolean,
         startButton: Button
     ) {
+        Log.i(TAG, "userInputMessageIsValid: $userInputMessageIsValid")
+        Log.i(TAG, "userInputPhoneIsValid: $userInputPhoneIsValid")
+        Log.i(TAG, "userInputNagTimeIsValid: $userInputNagTimeIsValid")
+
         if (userInputMessageIsValid && userInputPhoneIsValid && userInputNagTimeIsValid) {
             startButton.isEnabled = true;
         }
