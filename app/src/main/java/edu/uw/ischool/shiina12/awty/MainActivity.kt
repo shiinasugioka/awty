@@ -3,6 +3,7 @@ package edu.uw.ischool.shiina12.awty
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.telephony.PhoneNumberUtils
+import android.telephony.PhoneNumberUtils.FORMAT_NANP
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
@@ -58,8 +59,8 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun afterTextChanged(s: Editable?) {
-                val formattedNumber = PhoneNumberUtils.formatNumber(s, 0)
-                if (PhoneNumberUtils.isGlobalPhoneNumber(formattedNumber)) {
+                val formattedNumber = PhoneNumberUtils.formatNumber(s.toString(), "US")
+                if (PhoneNumberUtils.isGlobalPhoneNumber(formattedNumber) && formattedNumber.isNotEmpty()) {
                     userInputPhoneIsValid = true;
                 }
                 validateInput(
@@ -91,8 +92,6 @@ class MainActivity : AppCompatActivity() {
                 )
             }
         })
-
-
     }
 
     fun validateInput(
