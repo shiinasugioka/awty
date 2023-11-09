@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/inputLinearLayout"
+        style="@style/inputLinearLayout"
+        app:layout_constraintBottom_toTopOf="@+id/buttonLinearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/messageTextView"
+            style="@style/messageTextView"
+            android:text="@string/messageTextViewText"
+            tools:layout_editor_absoluteX="76dp"
+            tools:layout_editor_absoluteY="154dp" />
+
+        <EditText
+            android:id="@+id/userInputMessage"
+            style="@style/userInputMessage"
+            android:hint="@string/userInputMessageHint"
+            android:importantForAutofill="no"
+            tools:layout_editor_absoluteX="76dp"
+            tools:layout_editor_absoluteY="180dp" />
+
+        <TextView
+            android:id="@+id/phoneNumTextView"
+            style="@style/phoneNumTextView"
+            android:text="@string/phoneNumTextViewText"
+            tools:layout_editor_absoluteX="76dp"
+            tools:layout_editor_absoluteY="265dp" />
+
+        <EditText
+            android:id="@+id/userInputPhone"
+            style="@style/userInputPhone"
+            android:autofillHints="phone"
+            android:hint="@string/userInputPhoneHint"
+            tools:layout_editor_absoluteX="77dp"
+            tools:layout_editor_absoluteY="293dp" />
+
+        <TextView
+            android:id="@+id/nagTimeTextView"
+            style="@style/nagTimeTextView"
+            android:text="@string/nagTimeTextViewText"
+            tools:layout_editor_absoluteX="77dp"
+            tools:layout_editor_absoluteY="375dp" />
+
+        <EditText
+            android:id="@+id/userInputNagTime"
+            style="@style/userInputNagTime"
+            android:hint="@string/userInputNagTimeHint"
+            android:importantForAutofill="no"
+            tools:layout_editor_absoluteX="79dp"
+            tools:layout_editor_absoluteY="415dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/buttonLinearLayout"
+        style="@style/buttonLinearLayout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputLinearLayout">
+
+        <Button
+            android:id="@+id/startButton"
+            style="@style/startButton"
+            android:text="@string/startButtonText"
+            tools:layout_editor_absoluteX="161dp"
+            tools:layout_editor_absoluteY="551dp" />
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

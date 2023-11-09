@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <string name="app_name">awty</string>
+    <string name="messageTextViewText">What message would you like to send?</string>
+    <string name="nagTimeTextViewText">How often do you want to nag them?</string>
+    <string name="phoneNumTextViewText">Who do you want to send this to?</string>
+    <string name="startButtonText">Start</string>
+    <string name="userInputMessageHint">Your message here.</string>
+    <string name="userInputNagTimeHint">XX min</string>
+    <string name="userInputPhoneHint">(XXX) - XXX - XXXX</string>
+    <style name="Base.Theme.Awty" parent="Theme.Material3.DayNight.NoActionBar">
+        
+        
+    </style>
+    <style name="Theme.Awty" parent="Base.Theme.Awty"/>
+    <style name="buttonLinearLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginBottom">146dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="inputLinearLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">174dp</item>
+        <item name="android:layout_marginBottom">75dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+    <style name="messageTextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="nagTimeTextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="phoneNumTextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="startButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:backgroundTint">#37718a</item>
+    </style>
+    <style name="userInputMessage">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_marginBottom">40dp</item>
+        <item name="android:ems">10</item>
+        <item name="android:inputType">text</item>
+    </style>
+    <style name="userInputNagTime">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:ems">10</item>
+        <item name="android:inputType">number</item>
+    </style>
+    <style name="userInputPhone">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_marginBottom">40dp</item>
+        <item name="android:ems">10</item>
+        <item name="android:inputType">phone</item>
+    </style>
+</resources>
