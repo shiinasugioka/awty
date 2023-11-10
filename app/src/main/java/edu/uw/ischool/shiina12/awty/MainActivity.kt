@@ -1,19 +1,30 @@
 package edu.uw.ischool.shiina12.awty
 
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.telephony.PhoneNumberUtils
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 
-//private const val TAG = "Main"
+private const val TAG = "Main"
+const val ALARM_ACTION = "edu.uw.ischool.shiina12.ALARM"
 
 class MainActivity : AppCompatActivity() {
     private var hasStarted = false
+    private var toastMessage: String = ""
+    private var nagTime: Int = 0
+    private var receiver: BroadcastReceiver? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,7 +95,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun afterTextChanged(s: Editable?) {
                 val userInput = userInputNagTimeEditText.text.toString()
-                if (TextUtils.isDigitsOnly(userInput) && userInput.toInt() > 0) {
+                if (userInput.isNotEmpty() && TextUtils.isDigitsOnly(userInput) && userInput.toInt() > 0) {
                     userInputNagTimeIsValid = true
                 }
                 validateInput(
@@ -96,15 +107,17 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-
         startButton.setOnClickListener {
             val message = userInputMessageEditText.text.toString()
             val phoneNum = userInputPhoneEditText.text.toString()
-            val nagTime = userInputNagTimeEditText.text.toString().toInt()
+            toastMessage = "$phoneNum: $message"
+            nagTime = userInputNagTimeEditText.text.toString().toInt() * 60 * 1000
 
             if (!hasStarted) {
-                startNag(message, phoneNum, nagTime, startButton)
+                Log.d(TAG, "starting toasts.")
+                startNag(startButton)
             } else {
+                Log.d(TAG, "ending toasts.")
                 endNag(startButton)
             }
 
@@ -122,19 +135,44 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startNag(
-        message: String,
-        phoneNum: String,
-        nagTime: Int,
         startButton: Button
     ) {
         hasStarted = true
-        startButton.text = "@string/stopButtonText"
-        val toastText = "$phoneNum: $message"
-        Toast.makeText(this, toastText, Toast.LENGTH_SHORT).show()
+        startButton.text = getString(R.string.stopButtonText)
+
+        Log.i(TAG, "message in startNag: $toastMessage")
+        val activityThis = this
+
+        if (receiver == null) {
+            receiver = object: BroadcastReceiver() {
+                override fun onReceive(context: Context?, intent: Intent?) {
+                    Toast.makeText(activityThis, toastMessage, Toast.LENGTH_SHORT).show()
+                }
+            }
+            val filter = IntentFilter(ALARM_ACTION)
+            registerReceiver(receiver, filter)
+        }
+
+        // create the PendingIntent
+        val intent = Intent(ALARM_ACTION)
+        val pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+
+        // get the alarm manager
+        val alarmManager: AlarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), nagTime.toLong(), pendingIntent)
+
     }
 
     private fun endNag(startButton: Button) {
         hasStarted = false
-        startButton.text = "@string/startButtonText"
+        startButton.text = getString(R.string.startButtonText)
+
+        // create the PendingIntent
+        val intent = Intent(ALARM_ACTION)
+        val pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+
+        // get the alarm manager
+        val alarmManager: AlarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        alarmManager.cancel(pendingIntent)
     }
 }

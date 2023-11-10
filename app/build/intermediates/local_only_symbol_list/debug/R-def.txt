@@ -21,6 +21,7 @@ string messageTextViewText
 string nagTimeTextViewText
 string phoneNumTextViewText
 string startButtonText
+string stopButtonText
 string userInputMessageHint
 string userInputNagTimeHint
 string userInputPhoneHint

@@ -3903,6 +3903,7 @@ string side_sheet_accessibility_pane_title
 string side_sheet_behavior
 string startButtonText
 string status_bar_notification_info_overflow
+string stopButtonText
 string userInputMessageHint
 string userInputNagTimeHint
 string userInputPhoneHint

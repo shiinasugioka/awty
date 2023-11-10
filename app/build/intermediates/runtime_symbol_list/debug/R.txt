@@ -3902,6 +3902,7 @@ int string side_sheet_accessibility_pane_title 0x7f0f00a0
 int string side_sheet_behavior 0x7f0f00a1
 int string startButtonText 0x7f0f00a2
 int string status_bar_notification_info_overflow 0x7f0f00a3
+int string stopButtonText 0x7f0f00a7
 int string userInputMessageHint 0x7f0f00a4
 int string userInputNagTimeHint 0x7f0f00a5
 int string userInputPhoneHint 0x7f0f00a6

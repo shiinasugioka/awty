@@ -7,6 +7,7 @@
     <string name="nagTimeTextViewText">How often do you want to nag them?</string>
     <string name="phoneNumTextViewText">Who do you want to send this to?</string>
     <string name="startButtonText">Start</string>
+    <string name="stopButtonText">STOP</string>
     <string name="userInputMessageHint">Your message here.</string>
     <string name="userInputNagTimeHint">XX min</string>
     <string name="userInputPhoneHint">(XXX) - XXX - XXXX</string>
