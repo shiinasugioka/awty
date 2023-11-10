@@ -3,17 +3,19 @@ package edu.uw.ischool.shiina12.awty
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.telephony.PhoneNumberUtils
-import android.telephony.PhoneNumberUtils.FORMAT_NANP
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 
 private const val TAG = "Main"
 
 class MainActivity : AppCompatActivity() {
+    private var has_started = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -25,6 +27,8 @@ class MainActivity : AppCompatActivity() {
         val startButton: Button = findViewById(R.id.startButton)
 
         startButton.isEnabled = false
+        has_started = false
+
         var userInputMessageIsValid = false;
         var userInputPhoneIsValid = false;
         var userInputNagTimeIsValid = false;
@@ -92,6 +96,20 @@ class MainActivity : AppCompatActivity() {
                 )
             }
         })
+
+
+        startButton.setOnClickListener {
+            val message = userInputMessageEditText.text.toString()
+            val phoneNum = userInputPhoneEditText.text.toString()
+            val nagTime = userInputNagTimeEditText.text.toString().toInt()
+
+            if (!has_started) {
+                startNag(message, phoneNum, nagTime, startButton)
+            } else {
+                endNag(startButton)
+            }
+
+        }
     }
 
     fun validateInput(
@@ -100,12 +118,24 @@ class MainActivity : AppCompatActivity() {
         userInputNagTimeIsValid: Boolean,
         startButton: Button
     ) {
-        Log.i(TAG, "userInputMessageIsValid: $userInputMessageIsValid")
-        Log.i(TAG, "userInputPhoneIsValid: $userInputPhoneIsValid")
-        Log.i(TAG, "userInputNagTimeIsValid: $userInputNagTimeIsValid")
+        startButton.isEnabled =
+            userInputMessageIsValid && userInputPhoneIsValid && userInputNagTimeIsValid
+    }
 
-        if (userInputMessageIsValid && userInputPhoneIsValid && userInputNagTimeIsValid) {
-            startButton.isEnabled = true;
-        }
+    private fun startNag(
+        message: String,
+        phoneNum: String,
+        nagTime: Int,
+        startButton: Button
+    ) {
+        has_started = true
+        startButton.text = "STOP"
+        val toastText = "$phoneNum: $message"
+        Toast.makeText(this, toastText, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun endNag(startButton: Button) {
+        has_started = false
+        startButton.text = "Start"
     }
 }
