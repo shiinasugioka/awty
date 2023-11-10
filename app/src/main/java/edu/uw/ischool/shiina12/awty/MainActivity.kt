@@ -6,15 +6,14 @@ import android.telephony.PhoneNumberUtils
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 
-private const val TAG = "Main"
+//private const val TAG = "Main"
 
 class MainActivity : AppCompatActivity() {
-    private var has_started = false
+    private var hasStarted = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,11 +26,11 @@ class MainActivity : AppCompatActivity() {
         val startButton: Button = findViewById(R.id.startButton)
 
         startButton.isEnabled = false
-        has_started = false
+        hasStarted = false
 
-        var userInputMessageIsValid = false;
-        var userInputPhoneIsValid = false;
-        var userInputNagTimeIsValid = false;
+        var userInputMessageIsValid = false
+        var userInputPhoneIsValid = false
+        var userInputNagTimeIsValid = false
 
         userInputMessageEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -43,7 +42,7 @@ class MainActivity : AppCompatActivity() {
             override fun afterTextChanged(s: Editable?) {
                 val userInput = s.toString()
                 if (userInput.isNotEmpty()) {
-                    userInputMessageIsValid = true;
+                    userInputMessageIsValid = true
                 }
                 validateInput(
                     userInputMessageIsValid,
@@ -65,7 +64,7 @@ class MainActivity : AppCompatActivity() {
             override fun afterTextChanged(s: Editable?) {
                 val formattedNumber = PhoneNumberUtils.formatNumber(s.toString(), "US")
                 if (PhoneNumberUtils.isGlobalPhoneNumber(formattedNumber) && formattedNumber.isNotEmpty()) {
-                    userInputPhoneIsValid = true;
+                    userInputPhoneIsValid = true
                 }
                 validateInput(
                     userInputMessageIsValid,
@@ -86,7 +85,7 @@ class MainActivity : AppCompatActivity() {
             override fun afterTextChanged(s: Editable?) {
                 val userInput = userInputNagTimeEditText.text.toString()
                 if (TextUtils.isDigitsOnly(userInput) && userInput.toInt() > 0) {
-                    userInputNagTimeIsValid = true;
+                    userInputNagTimeIsValid = true
                 }
                 validateInput(
                     userInputMessageIsValid,
@@ -103,7 +102,7 @@ class MainActivity : AppCompatActivity() {
             val phoneNum = userInputPhoneEditText.text.toString()
             val nagTime = userInputNagTimeEditText.text.toString().toInt()
 
-            if (!has_started) {
+            if (!hasStarted) {
                 startNag(message, phoneNum, nagTime, startButton)
             } else {
                 endNag(startButton)
@@ -128,14 +127,14 @@ class MainActivity : AppCompatActivity() {
         nagTime: Int,
         startButton: Button
     ) {
-        has_started = true
-        startButton.text = "STOP"
+        hasStarted = true
+        startButton.text = "@string/stopButtonText"
         val toastText = "$phoneNum: $message"
         Toast.makeText(this, toastText, Toast.LENGTH_SHORT).show()
     }
 
     private fun endNag(startButton: Button) {
-        has_started = false
-        startButton.text = "Start"
+        hasStarted = false
+        startButton.text = "@string/startButtonText"
     }
 }

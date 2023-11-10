@@ -4,7 +4,7 @@
             "outputFile": "edu.uw.ischool.shiina12.awty.app-mergeDebugResources-29:/values-hy/values-hy.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\ssugi\\.gradle\\caches\\transforms-3\\63382362199d553975ec785d0a1c3d4b\\transformed\\material-1.10.0\\res\\values-hy\\values-hy.xml",
+                    "source": "C:\\Users\\ssugi\\.gradle\\caches\\transforms-3\\cb8d842abcf3c374139a925bdd97c7e0\\transformed\\material-1.10.0\\res\\values-hy\\values-hy.xml",
                     "from": {
                         "startLines": "2,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -23,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\ssugi\\.gradle\\caches\\transforms-3\\ea81018398a5eb9877f0ba4a04db551f\\transformed\\appcompat-1.6.1\\res\\values-hy\\values-hy.xml",
+                    "source": "C:\\Users\\ssugi\\.gradle\\caches\\transforms-3\\c1fb0fb464df787c9458f5aa9079531d\\transformed\\appcompat-1.6.1\\res\\values-hy\\values-hy.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -40,7 +40,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\ssugi\\.gradle\\caches\\transforms-3\\43edc55df3b5c22b93aea8041b6b233a\\transformed\\core-1.9.0\\res\\values-hy\\values-hy.xml",
+                    "source": "C:\\Users\\ssugi\\.gradle\\caches\\transforms-3\\b5ba732faec324c1f421e5180141a7a3\\transformed\\core-1.9.0\\res\\values-hy\\values-hy.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

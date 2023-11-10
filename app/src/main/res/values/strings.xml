@@ -7,4 +7,5 @@
     <string name="nagTimeTextViewText">How often do you want to nag them?</string>
     <string name="userInputNagTimeHint">XX min</string>
     <string name="startButtonText">Start</string>
+    <string name="stopButtonText">STOP</string>
 </resources>

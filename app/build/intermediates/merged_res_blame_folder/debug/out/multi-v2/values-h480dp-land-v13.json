@@ -4,7 +4,7 @@
             "outputFile": "edu.uw.ischool.shiina12.awty.app-mergeDebugResources-29:/values-h480dp-land-v13/values-h480dp-land-v13.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\ssugi\\.gradle\\caches\\transforms-3\\63382362199d553975ec785d0a1c3d4b\\transformed\\material-1.10.0\\res\\values-h480dp-land-v13\\values-h480dp-land-v13.xml",
+                    "source": "C:\\Users\\ssugi\\.gradle\\caches\\transforms-3\\cb8d842abcf3c374139a925bdd97c7e0\\transformed\\material-1.10.0\\res\\values-h480dp-land-v13\\values-h480dp-land-v13.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10",
                         "startColumns": "4,4,4,4,4,4,4,4,4",
