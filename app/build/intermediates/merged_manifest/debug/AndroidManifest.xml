@@ -8,6 +8,12 @@
         android:minSdkVersion="28"
         android:targetSdkVersion="34" />
 
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.SEND_SMS" />
+
     <permission
         android:name="edu.uw.ischool.shiina12.awty.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
         android:protectionLevel="signature" />

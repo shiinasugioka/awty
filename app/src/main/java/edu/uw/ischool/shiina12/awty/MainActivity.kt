@@ -9,6 +9,7 @@ import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.telephony.PhoneNumberUtils
+import android.telephony.SmsManager
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
@@ -22,7 +23,8 @@ const val ALARM_ACTION = "edu.uw.ischool.shiina12.ALARM"
 
 class MainActivity : AppCompatActivity() {
     private var hasStarted = false
-    private var toastMessage: String = ""
+    private var message: String = ""
+    private var phoneNum: String = ""
     private var nagTime: Int = 0
     private var receiver: BroadcastReceiver? = null
 
@@ -108,16 +110,16 @@ class MainActivity : AppCompatActivity() {
         })
 
         startButton.setOnClickListener {
-            val message = userInputMessageEditText.text.toString()
-            val phoneNum = userInputPhoneEditText.text.toString()
-            toastMessage = "$phoneNum: $message"
+            message = userInputMessageEditText.text.toString()
+            phoneNum = userInputPhoneEditText.text.toString()
+//            toastMessage = "$phoneNum: $message"
             nagTime = userInputNagTimeEditText.text.toString().toInt() * 60 * 1000
 
             if (!hasStarted) {
-                Log.d(TAG, "starting toasts.")
+                Log.d(TAG, "starting SMS nagging.")
                 startNag(startButton)
             } else {
-                Log.d(TAG, "ending toasts.")
+                Log.d(TAG, "ending SMS nagging.")
                 endNag(startButton)
             }
 
@@ -140,14 +142,18 @@ class MainActivity : AppCompatActivity() {
         hasStarted = true
         startButton.text = getString(R.string.stopButtonText)
 
-        Log.i(TAG, "message in startNag: $toastMessage")
-        val activityThis = this
+        Log.i(TAG, "message in startNag: $message")
+//        val activityThis = this
 
         if (receiver == null) {
-            receiver = object: BroadcastReceiver() {
+            receiver = object : BroadcastReceiver() {
                 override fun onReceive(context: Context?, intent: Intent?) {
-                    Toast.makeText(activityThis, toastMessage, Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(activityThis, toastMessage, Toast.LENGTH_SHORT).show()
+                    if (context != null) {
+                        sendSMS(message, context)
+                    }
                 }
+
             }
             val filter = IntentFilter(ALARM_ACTION)
             registerReceiver(receiver, filter)
@@ -155,12 +161,30 @@ class MainActivity : AppCompatActivity() {
 
         // create the PendingIntent
         val intent = Intent(ALARM_ACTION)
-        val pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+        val pendingIntent =
+            PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
 
         // get the alarm manager
         val alarmManager: AlarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), nagTime.toLong(), pendingIntent)
+        alarmManager.setRepeating(
+            AlarmManager.RTC_WAKEUP,
+            System.currentTimeMillis(),
+            nagTime.toLong(),
+            pendingIntent
+        )
+    }
 
+    private fun sendSMS(message: String, context: Context) {
+        try {
+//            val smsManager: SmsManager = SmsManager.getDefault()
+            val smsManager: SmsManager? =
+                context.getSystemService(SmsManager::class.java) as? SmsManager
+            smsManager?.sendTextMessage(phoneNum, null, message, null, null)
+            Toast.makeText(this, "Message sent!", Toast.LENGTH_SHORT).show()
+        } catch (e: Exception) {
+            Toast.makeText(this, "Message failed to send.", Toast.LENGTH_SHORT).show()
+            Log.d(TAG, "text send failure: $e")
+        }
     }
 
     private fun endNag(startButton: Button) {
@@ -169,7 +193,8 @@ class MainActivity : AppCompatActivity() {
 
         // create the PendingIntent
         val intent = Intent(ALARM_ACTION)
-        val pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+        val pendingIntent =
+            PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
 
         // get the alarm manager
         val alarmManager: AlarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
